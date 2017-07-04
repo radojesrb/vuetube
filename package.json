@@ -1,6 +1,6 @@
 {
-  "name": "vue-video",
-  "version": "1.0.0",
+  "name": "vuetube",
+  "version": "0.0.1",
   "description": "A Vue.js project",
   "author": "Dusan Radojevic <dusan.radojevic@namics.com>",
   "private": true,
