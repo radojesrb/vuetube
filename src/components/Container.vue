@@ -3,7 +3,7 @@
     <div class="row no-gutters row-eq-height">
       <div v-if="activeVideo.id" class="col-xs-12 col-sm-12 col-md-8">
         <youtube v-if="activeVideo.id" :video-id="activeVideo.id" player-width="100%" player-height="320"></youtube>
-        <h1 class="video-title">{{ titleComputed }}</h1>
+        <h1 class="video-title" v-html="titleComputed"></h1>
       </div>
       <div :class="{ 'col-xs-12 col-sm-12 col-md-4': activeVideo.id, 'col-xs-12 col-sm-12 col-md-12': !activeVideo.id }"class="">
         <video-list :videos="videos" @clicked="updateVideo"></video-List>
@@ -60,7 +60,7 @@ export default {
   computed: {
     titleComputed () {
       if (this.activeVideo.title.length > 0) {
-        return `Video title: ${this.activeVideo.title}`
+        return `<span>Video title:</span> ${this.activeVideo.title}`
       }
     }
   }
@@ -71,7 +71,12 @@ export default {
 .video-title {
   margin: 0;
   padding: 5px 0 10px 0;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 300;
+
+  span {
+    font-weight: 600;
+  }
 }
 
 .spacer-s {
