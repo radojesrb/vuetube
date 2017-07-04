@@ -1,0 +1,81 @@
+<template>
+  <div class="container">
+    <div class="row no-gutters row-eq-height">
+      <div v-if="activeVideo.id" class="col-xs-12 col-sm-12 col-md-8">
+        <youtube v-if="activeVideo.id" :video-id="activeVideo.id" player-width="100%" player-height="320"></youtube>
+        <h1 class="video-title">{{ titleComputed }}</h1>
+      </div>
+      <div :class="{ 'col-xs-12 col-sm-12 col-md-4': activeVideo.id, 'col-xs-12 col-sm-12 col-md-12': !activeVideo.id }"class="">
+        <video-list :videos="videos" @clicked="updateVideo"></video-List>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Vue from 'vue'
+import List from '@/components/List'
+import VueYouTubeEmbed from 'vue-youtube-embed'
+Vue.use(VueYouTubeEmbed)
+
+export default {
+  name: 'container',
+
+  components: {
+    'video-list': List
+  },
+
+  data () {
+    return {
+      videos: [
+        {
+          title: 'Sveeeee!',
+          id: 'xs7le_keT2g'
+        },
+        {
+          title: 'NBA',
+          id: 'fI-XfjQCDwM'
+        }
+      ],
+      activeVideo: {
+        title: '',
+        id: ''
+      }
+    }
+  },
+
+  methods: {
+    updateVideo (id) {
+      const video = this.videos.filter((video) => video.id === id)[0]
+      this.activeVideo = video
+    }
+  },
+
+  watch: {
+    activeVideo () {
+      console.log('Video is ready to play!')
+    }
+  },
+
+  computed: {
+    titleComputed () {
+      if (this.activeVideo.title.length > 0) {
+        return `Video title: ${this.activeVideo.title}`
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.video-title {
+  margin: 0;
+  padding: 5px 0 10px 0;
+  font-size: 16px;
+}
+
+.spacer-s {
+  width: 100%;
+  height: 10px;
+}
+</style>
