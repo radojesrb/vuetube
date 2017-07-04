@@ -1,6 +1,6 @@
-# vue-video
+# vuetube
 
-> A Vue.js project
+> A Vue.js teaching project
 
 ## Build Setup
 
@@ -18,4 +18,4 @@ npm run build
 npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+This is small project made for purpose of teaching VueJS. Workshop is splitted in two sessions, where first one is intro to Vue basics and second is covering state management with Vuex...
