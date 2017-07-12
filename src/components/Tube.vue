@@ -16,10 +16,15 @@
 import Vue from 'vue'
 import List from '@/components/List'
 import VueYouTubeEmbed from 'vue-youtube-embed'
+
+import { mapGetters, mapActions } from 'vuex'
+
 Vue.use(VueYouTubeEmbed)
 
 export default {
-  name: 'container',
+  name: 'tube',
+
+  asyncData: ({ dispatch }) => dispatch('videos/get'),
 
   components: {
     'video-list': List
@@ -27,19 +32,23 @@ export default {
 
   data () {
     return {
-      videos: [
-        {
-          title: 'Sveeeee!',
-          id: 'xs7le_keT2g'
-        },
-        {
-          title: 'NBA',
-          id: 'fI-XfjQCDwM'
-        }
-      ],
       activeVideo: {
         title: '',
         id: ''
+      }
+    }
+  },
+
+  computed: {
+    ...mapGetters('videos', ['list']),
+
+    videos () {
+      return this.list
+    },
+
+    titleComputed () {
+      if (this.activeVideo.title.length > 0) {
+        return `<span>Video title:</span> ${this.activeVideo.title}`
       }
     }
   },
@@ -52,16 +61,10 @@ export default {
   },
 
   watch: {
+    ...mapActions('videos', ['get']),
+
     activeVideo () {
       console.log('Video is ready to play!')
-    }
-  },
-
-  computed: {
-    titleComputed () {
-      if (this.activeVideo.title.length > 0) {
-        return `<span>Video title:</span> ${this.activeVideo.title}`
-      }
     }
   }
 }
